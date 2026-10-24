@@ -40,6 +40,7 @@ export const handler = async (event, context) => {
 
     const clientName = clean(data.Client_Name || data.name, 80) || 'Client';
     const clientEmail = clean(data.Client_Email || data.email, 100) || 'N/A';
+    const clientPhone = clean(data.Client_Phone || data.phone, 30) || 'N/A';
     const brand = clean(data.Brand_or_Website || data.brand, 120) || 'Not provided / Still building';
     const day = clean(data.Selected_Day || data.day, 40) || 'N/A';
     const time = clean(data.Selected_Time || data.time, 40) || 'N/A';
@@ -47,11 +48,12 @@ export const handler = async (event, context) => {
     const notes = clean(data.Client_Notes || data.notes, 500) || 'None';
 
     const payload = {
-      _subject: `🚀 New Discovery Call Booking: ${clientName} (${brand})`,
+      _subject: `🚀 New Discovery Call Booking: ${clientName} | ${clientPhone} (${brand})`,
       _template: 'table',
       _captcha: 'false',
       Client_Name: clientName,
       Client_Email: clientEmail,
+      Client_Phone: clientPhone,
       Brand_or_Website: brand,
       Selected_Day: day,
       Selected_Time: time,

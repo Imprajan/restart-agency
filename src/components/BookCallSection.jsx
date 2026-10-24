@@ -32,7 +32,7 @@ export default function BookCallSection({ studio, socials = [] }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [honeypot, setHoneypot] = useState('');
-  const [formData, setFormData] = useState({ name: '', email: '', brand: '', notes: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', brand: '', notes: '' });
 
   const standardDates = ['Tomorrow', 'Next Monday'];
   const contactEmail = '22truefeed@gmail.com';
@@ -100,18 +100,20 @@ export default function BookCallSection({ studio, socials = [] }) {
     // 3. Strict Input Sanitization & Character Limits
     const clientName = cleanInput(formData.name, 80) || 'Client';
     const clientEmail = cleanInput(formData.email, 100) || 'N/A';
+    const clientPhone = cleanInput(formData.phone, 30) || 'N/A';
     const brand = cleanInput(formData.brand, 120) || 'Not provided / Still building';
     const rawSpend = monthlySpend === 'Custom' && customSpendInput.trim()
       ? `Custom: ${cleanInput(customSpendInput, 60)}`
       : monthlySpend;
 
     const submissionPayload = {
-      _subject: `🚀 New Discovery Call Booking: ${clientName} (${brand})`,
+      _subject: `🚀 New Discovery Call Booking: ${clientName} | ${clientPhone} (${brand})`,
       _template: 'table',
       _captcha: 'false',
       _honey: honeypot,
       Client_Name: clientName,
       Client_Email: clientEmail,
+      Client_Phone: clientPhone,
       Brand_or_Website: brand,
       Selected_Day: cleanInput(selectedDate, 40),
       Selected_Time: cleanInput(selectedTime, 40),
@@ -261,12 +263,12 @@ export default function BookCallSection({ studio, socials = [] }) {
                     </h3>
                   </div>
                   <p className="text-sm text-[#77766F] font-semibold max-w-md mx-auto leading-relaxed">
-                    We've reserved <strong>{selectedDate} at {selectedTime}</strong>. We'll send a calendar invite and Google Meet link to <strong>{formData.email || 'your email'}</strong>.
+                    We've reserved <strong>{selectedDate} at {selectedTime}</strong>. We'll send a calendar invite to <strong>{formData.email || 'your email'}</strong> and connect on phone/WhatsApp at <strong>{formData.phone || 'your number'}</strong>.
                   </p>
                   <button
                     onClick={() => {
                       setFormSubmitted(false);
-                      setFormData({ name: '', email: '', brand: '', notes: '' });
+                      setFormData({ name: '', email: '', phone: '', brand: '', notes: '' });
                     }}
                     className="px-6 py-2.5 rounded-full bg-[#171714] text-white text-xs font-extrabold uppercase tracking-wider hover:bg-[#00E575] hover:text-[#171714] transition-colors cursor-pointer"
                   >
@@ -441,7 +443,7 @@ export default function BookCallSection({ studio, socials = [] }) {
                     />
                   </div>
 
-                  {/* Form Inputs */}
+                  {/* Form Inputs (3 Mandatory: Name, Phone, Email + 1 Optional: Brand/Website) */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                     <div>
                       <label className="block text-[11px] font-extrabold uppercase text-[#171714] mb-1">
@@ -459,27 +461,41 @@ export default function BookCallSection({ studio, socials = [] }) {
                     </div>
                     <div>
                       <label className="block text-[11px] font-extrabold uppercase text-[#171714] mb-1">
-                        Work Email *
+                        Phone / WhatsApp Number *
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        maxLength={25}
+                        placeholder="e.g. +91 98765 43210"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[#171714] text-xs font-semibold focus:outline-none focus:bg-[#FFFDEE]"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-extrabold uppercase text-[#171714] mb-1">
+                        Gmail / Work Email *
                       </label>
                       <input
                         type="email"
                         required
                         maxLength={100}
-                        placeholder="alex@yourbrand.com"
+                        placeholder="alex@gmail.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[#171714] text-xs font-semibold focus:outline-none focus:bg-[#FFFDEE]"
                       />
                     </div>
-                    <div className="sm:col-span-2">
+                    <div>
                       <label className="block text-[11px] font-extrabold uppercase text-[#171714] mb-1 flex items-center justify-between">
-                        <span>Brand Name or Website</span>
-                        <span className="text-[10px] text-[#77766F] font-mono font-semibold">(Optional — not everyone has a site)</span>
+                        <span>Brand or Website</span>
+                        <span className="text-[10px] text-[#77766F] font-mono font-semibold">(Optional)</span>
                       </label>
                       <input
                         type="text"
                         maxLength={120}
-                        placeholder="e.g. Nike, Personal Brand, or website URL (optional)"
+                        placeholder="e.g. Nike, Brand URL (optional)"
                         value={formData.brand}
                         onChange={(e) => setFormData({ ...formData, brand: e.target.value })}
                         className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[#171714] text-xs font-semibold focus:outline-none focus:bg-[#FFFDEE]"

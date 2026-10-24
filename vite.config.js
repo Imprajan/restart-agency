@@ -39,11 +39,12 @@ function localApiPlugin() {
               return;
             }
             const payload = {
-              _subject: `🚀 New Discovery Call Booking: ${data.Client_Name || data.name || 'Client'} (${data.Brand_or_Website || data.brand || 'No Website'})`,
+              _subject: `🚀 New Discovery Call Booking: ${data.Client_Name || data.name || 'Client'} | ${data.Client_Phone || data.phone || 'N/A'} (${data.Brand_or_Website || data.brand || 'No Website'})`,
               _template: 'table',
               _captcha: 'false',
               Client_Name: data.Client_Name || data.name || 'N/A',
               Client_Email: data.Client_Email || data.email || 'N/A',
+              Client_Phone: data.Client_Phone || data.phone || 'N/A',
               Brand_or_Website: data.Brand_or_Website || data.brand || 'Not provided / Still building',
               Selected_Day: data.Selected_Day || data.day || 'N/A',
               Selected_Time: data.Selected_Time || data.time || 'N/A',
