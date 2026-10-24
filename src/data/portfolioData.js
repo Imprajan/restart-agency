@@ -1,4 +1,4 @@
-export const driveImageUrl = (id, w = 1600) => (id ? `https://lh3.googleusercontent.com/d/${id}=w${w}` : '/hero-avatar.png');
+export const fallbackPoster = '/hero-avatar.png';
 
 export const studioData = {
   studio: {
@@ -82,8 +82,8 @@ export const studioData = {
       category: "UGC Product Promotion",
       year: "2026",
       client: "Heritage Fine Jewelry",
-      videoUrl: "/videos/Prdouct-1.mp4",
-      directViewUrl: "/videos/Prdouct-1.mp4",
+      videoUrl: "/videos/Product-1.mp4",
+      directViewUrl: "/videos/Product-1.mp4",
       metrics: "Commercial TVC • 4K Master",
       description: "Direct-response luxury jewelry commercial featuring cinematic macro lighting, royal pacing, and high-conversion aesthetic.",
       tags: ["Fine Jewelry", "Luxury Commercial", "Macro 4K", "Brand TVC"]
@@ -146,7 +146,6 @@ export const studioData = {
       client: "Top 1% Creator Show",
       videoUrl: "/videos/podcast-1.mp4",
       directViewUrl: "/videos/podcast-1.mp4",
-      image: driveImageUrl("1Nj-AXqaVgLNX4XrFsWregSfWtues4Uyy", 1200),
       metrics: "8.5M Views • 65k Shares",
       description: "Engaging podcast short cut enriched with AI-generated visual B-roll, dynamic kinetic subtitles, and contextual sound effects that keep viewers glued.",
       tags: ["AI Podcast", "Kinetic Subtitles", "Viral Shorts", "Contextual B-Roll"]
@@ -159,7 +158,6 @@ export const studioData = {
       client: "Global Frontier Podcast",
       videoUrl: "/videos/podcast-2.mp4",
       directViewUrl: "/videos/podcast-2.mp4",
-      image: driveImageUrl("1jFaRjuaHVd587h8sYSS085MFShyj32Nh", 1200),
       metrics: "3.2M Impressions • High Shareability",
       description: "Conversational podcast reel featuring stylized framing, multi-cam switching simulation, sound enhancement, and dramatic visual inserts.",
       tags: ["Podcast Clips", "Story Pacing", "AI Visuals", "Audio Master"]
@@ -172,7 +170,6 @@ export const studioData = {
       client: "Executive Founder Series",
       videoUrl: "/videos/podcast-3.mp4",
       directViewUrl: "/videos/podcast-3.mp4",
-      image: driveImageUrl("1ZsyX4TVEL9eDnbY402HFZ-Q0sdHssV-a", 1200),
       metrics: "4K Master • 100% Custom Edits",
       description: "High-octane narrative podcast edit weaving spoken word philosophy with generative AI visual interludes and emotional background score.",
       tags: ["Narrative Flow", "AI Synthesis", "Cinema Score", "Podcast Reels"]
@@ -188,7 +185,6 @@ export const studioData = {
       status: "COMING SOON",
       isComingSoon: true,
       badge: "In Production Sprint",
-      image: driveImageUrl("1Be_Wy7PSSqWMJhGDsI4ybj23ypu6sG9U", 1200),
       metrics: "Release Q2 2026 • 4K HDR",
       description: "A gripping cinematic drama project currently in post-production. Featuring Hollywood-grade color science, tension-filled pacing, and original atmospheric scores.",
       tags: ["Drama", "Cinematic Film", "Post-Production", "Coming Soon"]
@@ -202,7 +198,6 @@ export const studioData = {
       status: "COMING SOON",
       isComingSoon: true,
       badge: "Sound Design & Color Grade",
-      image: driveImageUrl("1jFaRjuaHVd587h8sYSS085MFShyj32Nh", 1200),
       metrics: "Release Q2 2026 • Theatrical Cut",
       description: "Dark, moody dramatic sequence exploring psychological suspense through intricate pacing, silence design, and micro-expressions.",
       tags: ["Short Film", "Drama", "Sound Design", "Coming Soon"]
@@ -218,7 +213,6 @@ export const studioData = {
       status: "COMING SOON",
       isComingSoon: true,
       badge: "Blender & Maya Pipeline",
-      image: driveImageUrl("1ZsyX4TVEL9eDnbY402HFZ-Q0sdHssV-a", 1200),
       metrics: "Release Q3 2026 • Stylized 3D",
       description: "Expressive 3D animated character sequence featuring Pixar-level lighting, organic squashing & stretching, and charming emotive animation.",
       tags: ["Pixar Animation", "3D Character", "Subsurface Scatter", "Coming Soon"]
@@ -232,7 +226,6 @@ export const studioData = {
       status: "COMING SOON",
       isComingSoon: true,
       badge: "Rendering & Lighting Pass",
-      image: driveImageUrl("1B5b0Si4e2XvTYUdxINtobi1cwm9pRZoW", 1200),
       metrics: "Release Q3 2026 • Unreal Engine 5",
       description: "Heartwarming 3D animated commercial blending Pixar story beats with modern commercial punchiness to deliver high-converting brand affinity.",
       tags: ["Pixar Style", "Unreal 5", "Animation", "Coming Soon"]

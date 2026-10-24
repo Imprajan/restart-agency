@@ -62,7 +62,7 @@ export default function GlassmorphicBackground({ className = "" }) {
         
         {/* Blob 1: Luminous Warm Ivory / Cream Core (Top Left) */}
         <div
-          className="absolute -top-[12%] -left-[12%] w-[45vw] min-w-[320px] h-[45vw] min-h-[320px] rounded-full opacity-70"
+          className="absolute -top-[12%] -left-[12%] w-[45vw] min-w-[320px] h-[45vw] min-h-[320px] rounded-full opacity-70 mobile-static-blob"
           style={{
             background: 'radial-gradient(circle, rgba(255,248,231,0.85) 0%, rgba(245,230,204,0.5) 45%, transparent 72%)',
             transform: 'translate3d(0, 0, 0)',
@@ -73,7 +73,7 @@ export default function GlassmorphicBackground({ className = "" }) {
 
         {/* Blob 2: Sunshine Gold Glow (Center Right) */}
         <div
-          className="absolute top-[20%] -right-[10%] w-[42vw] min-w-[300px] h-[42vw] min-h-[300px] rounded-full opacity-65"
+          className="absolute top-[20%] -right-[10%] w-[42vw] min-w-[300px] h-[42vw] min-h-[300px] rounded-full opacity-65 mobile-static-blob"
           style={{
             background: 'radial-gradient(circle, rgba(255,228,158,0.75) 0%, rgba(255,210,119,0.45) 45%, transparent 70%)',
             transform: 'translate3d(0, 0, 0)',
@@ -84,7 +84,7 @@ export default function GlassmorphicBackground({ className = "" }) {
 
         {/* Blob 3: Growthub Mint Aurora Ribbon (Bottom Left) */}
         <div
-          className="absolute -bottom-[12%] left-[8%] w-[45vw] min-w-[320px] h-[45vw] min-h-[320px] rounded-full opacity-60"
+          className="absolute -bottom-[12%] left-[8%] w-[45vw] min-w-[320px] h-[45vw] min-h-[320px] rounded-full opacity-60 mobile-static-blob"
           style={{
             background: 'radial-gradient(circle, rgba(166,253,224,0.7) 0%, rgba(106,251,192,0.4) 45%, transparent 70%)',
             transform: 'translate3d(0, 0, 0)',
@@ -95,7 +95,7 @@ export default function GlassmorphicBackground({ className = "" }) {
 
         {/* Blob 4: Soft Champagne Vanilla (Bottom Right) */}
         <div
-          className="absolute -bottom-[10%] -right-[8%] w-[38vw] min-w-[280px] h-[38vw] min-h-[280px] rounded-full opacity-60"
+          className="absolute -bottom-[10%] -right-[8%] w-[38vw] min-w-[280px] h-[38vw] min-h-[280px] rounded-full opacity-60 mobile-static-blob"
           style={{
             background: 'radial-gradient(circle, rgba(255,240,220,0.8) 0%, rgba(252,227,197,0.4) 45%, transparent 70%)',
             transform: 'translate3d(0, 0, 0)',
@@ -118,9 +118,8 @@ export default function GlassmorphicBackground({ className = "" }) {
       </div>
 
       {/* 2. LAYER B: OPTIMIZED FROSTED GLASS SURFACE */}
-      {/* On desktop: silky 20px blur. On mobile: lightweight 8px blur or pure translucent mesh */}
       <div
-        className="absolute inset-0 backdrop-blur-[12px] sm:backdrop-blur-[24px]"
+        className="absolute inset-0 backdrop-blur-[4px] sm:backdrop-blur-[24px]"
         style={{
           background: 'linear-gradient(135deg, rgba(242, 240, 232, 0.6) 0%, rgba(245, 243, 236, 0.45) 50%, rgba(239, 236, 227, 0.65) 100%)',
         }}

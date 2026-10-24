@@ -179,6 +179,12 @@
 }
 
 /* GPU-Accelerated Hardware Blobs (Zero Layout Re-calculations) */
+@media (max-width: 768px) {
+  .mobile-static-blob {
+    animation: none !important;
+  }
+}
+
 @keyframes gpu-blob-drift-1 {
   0% {
     transform: translate3d(0, 0, 0) scale(1);
