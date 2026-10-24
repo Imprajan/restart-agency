@@ -31,11 +31,14 @@ export default function BookCallSection({ studio, socials = [] }) {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [honeypot, setHoneypot] = useState('');
   const [formData, setFormData] = useState({ name: '', email: '', brand: '', notes: '' });
 
   const standardDates = ['Tomorrow', 'Next Monday'];
   const contactEmail = '22truefeed@gmail.com';
   const todayISO = new Date().toISOString().split('T')[0];
+
+  const cleanInput = (val, max = 150) => (val || '').slice(0, max).replace(/[<>]/g, '').trim();
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(contactEmail);
@@ -77,23 +80,43 @@ export default function BookCallSection({ studio, socials = [] }) {
 
   const handleSubmitBooking = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
-    const finalSpend = monthlySpend === 'Custom' && customSpendInput.trim()
-      ? `Custom: ${customSpendInput.trim()}`
+    // 1. Honeypot check: If bot filled the hidden honeypot, fake success without sending email
+    if (honeypot.trim() !== '') {
+      setFormSubmitted(true);
+      return;
+    }
+
+    // 2. Client-side Flood Prevention (minimum 15-second cooldown)
+    const lastSubmitTime = sessionStorage.getItem('restart_booking_last_ts');
+    if (lastSubmitTime && Date.now() - Number(lastSubmitTime) < 15000) {
+      alert('Please wait a few seconds before submitting another booking request.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    sessionStorage.setItem('restart_booking_last_ts', String(Date.now()));
+
+    // 3. Strict Input Sanitization & Character Limits
+    const clientName = cleanInput(formData.name, 80) || 'Client';
+    const clientEmail = cleanInput(formData.email, 100) || 'N/A';
+    const brand = cleanInput(formData.brand, 120) || 'Not provided / Still building';
+    const rawSpend = monthlySpend === 'Custom' && customSpendInput.trim()
+      ? `Custom: ${cleanInput(customSpendInput, 60)}`
       : monthlySpend;
 
     const submissionPayload = {
-      _subject: `🚀 New Discovery Call Booking: ${formData.name} (${formData.brand || 'No Website/Brand'})`,
+      _subject: `🚀 New Discovery Call Booking: ${clientName} (${brand})`,
       _template: 'table',
       _captcha: 'false',
-      Client_Name: formData.name,
-      Client_Email: formData.email,
-      Brand_or_Website: formData.brand ? formData.brand.trim() : 'Not provided / Still building',
-      Selected_Day: selectedDate,
-      Selected_Time: selectedTime,
-      Current_Ad_Marketing_Spend: finalSpend,
-      Client_Notes: formData.notes ? formData.notes.trim() : 'None',
+      _honey: honeypot,
+      Client_Name: clientName,
+      Client_Email: clientEmail,
+      Brand_or_Website: brand,
+      Selected_Day: cleanInput(selectedDate, 40),
+      Selected_Time: cleanInput(selectedTime, 40),
+      Current_Ad_Marketing_Spend: rawSpend,
+      Client_Notes: cleanInput(formData.notes, 500) || 'None',
       Submitted_At: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) + ' IST'
     };
 
@@ -404,6 +427,20 @@ export default function BookCallSection({ studio, socials = [] }) {
                     )}
                   </div>
 
+                  {/* Invisible Honeypot Trap (Drops automated spam bots silently) */}
+                  <div style={{ display: 'none', position: 'absolute', opacity: 0, pointerEvents: 'none' }} aria-hidden="true">
+                    <label htmlFor="form_honey">Leave this field empty</label>
+                    <input
+                      id="form_honey"
+                      type="text"
+                      name="_honey"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
+
                   {/* Form Inputs */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                     <div>
@@ -413,6 +450,7 @@ export default function BookCallSection({ studio, socials = [] }) {
                       <input
                         type="text"
                         required
+                        maxLength={80}
                         placeholder="e.g. Alex Morgan"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -426,6 +464,7 @@ export default function BookCallSection({ studio, socials = [] }) {
                       <input
                         type="email"
                         required
+                        maxLength={100}
                         placeholder="alex@yourbrand.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -439,6 +478,7 @@ export default function BookCallSection({ studio, socials = [] }) {
                       </label>
                       <input
                         type="text"
+                        maxLength={120}
                         placeholder="e.g. Nike, Personal Brand, or website URL (optional)"
                         value={formData.brand}
                         onChange={(e) => setFormData({ ...formData, brand: e.target.value })}

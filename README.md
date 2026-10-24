@@ -1,16 +1,24 @@
-# React + Vite
+# ⚡ RESTART — AI Digital Marketing & Creative Agency
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+> **"Let's Restart That Bitch"**  
+> High-impact UGC, AI commercials, and viral direct-response video creatives.
 
-Currently, two official plugins are available:
+## Tech Stack & Architecture
+- **Framework:** React 19 + Vite 8
+- **Styling:** Tailwind CSS v4 + Custom Neo-Brutalist Design System
+- **Animation:** Framer Motion, GSAP, Canvas Confetti
+- **3D & Shaders:** Three.js (WebGL Flashlight Reveal)
+- **Smooth Scroll:** Lenis (Desktop only, 120Hz native touch on mobile)
+- **Deployment:** Netlify (Serverless functions + Edge CDN)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Security & Privacy Highlights
+- **Zero Exposed Secrets:** No paid API keys, no Stripe/billing tokens, no private credentials.
+- **Bot & Spam Protection:** Honeypot traps, client rate-limiting, and input sanitization on all inquiry forms.
+- **Zero External Tracking:** No third-party ad tracking pixels or behavioral analytics.
+- **Serverless Form Processing:** Inquiries dispatched directly to configured email destination via Netlify serverless functions.
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Commands
+```bash
+npm run dev     # Start local development server
+npm run build   # Build production bundle in /dist
+```

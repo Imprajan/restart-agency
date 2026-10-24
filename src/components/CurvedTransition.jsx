@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 /**
- * Dennis Snellenberg Signature Curved Section Transition
+ * RESTART Signature Curved Section Transition
  * Bends organically into #171714 dark contact section.
  */
 export default function CurvedTransition() {

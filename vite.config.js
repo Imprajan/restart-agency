@@ -22,7 +22,22 @@ function localApiPlugin() {
 
         req.on('end', async () => {
           try {
+            if (body.length > 10000) {
+              res.statusCode = 413;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ error: 'Payload Too Large' }));
+              return;
+            }
+
             const data = JSON.parse(body || '{}');
+
+            // Drop bot honeypots silently
+            if (data._honey && String(data._honey).trim() !== '') {
+              res.statusCode = 200;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ success: true, message: 'Processed' }));
+              return;
+            }
             const payload = {
               _subject: `🚀 New Discovery Call Booking: ${data.Client_Name || data.name || 'Client'} (${data.Brand_or_Website || data.brand || 'No Website'})`,
               _template: 'table',
