@@ -1,0 +1,310 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-light: #F2F0E8;
+    --bg-dark: #171714;
+    --text-primary: #171714;
+    --text-secondary: #77766F;
+    --text-light: #F2F0E8;
+    --accent-lime: #C8FF3D;
+    --border-subtle: rgba(119, 118, 111, 0.25);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+
+  body {
+    background-color: #F2F0E8;
+    color: #171714;
+    font-family: 'Sora', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, .font-heading {
+    font-family: 'Sora', 'Bricolage Grotesque', sans-serif;
+  }
+}
+
+.font-sora {
+  font-family: 'Sora', sans-serif;
+}
+
+/* Growthub-Style Neo-Brutalist Design Tokens & Utility Classes */
+.neo-box {
+  border: 2px solid #171714;
+  box-shadow: 4px 4px 0px #171714;
+  border-radius: 1rem;
+}
+
+.neo-box-pill {
+  border: 1.5px solid #171714;
+  box-shadow: 3px 3px 0px #171714;
+  border-radius: 9999px;
+}
+
+.neo-btn {
+  border: 2px solid #171714;
+  box-shadow: 4px 4px 0px #171714;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.neo-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #171714;
+}
+
+.neo-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #171714;
+}
+
+/* Custom Scrollbar in Dark/Lime Tone */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #171714;
+}
+::-webkit-scrollbar-thumb {
+  background: #6AFBC0;
+  border-radius: 4px;
+}
+
+/* Magnetic Button Base Animation */
+.magnetic-btn {
+  will-change: transform;
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Horizontal Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Growthub-Style Vertical Video Track ("hmv") Animations — GPU-Compositor Accelerated */
+@keyframes marquee-vertical-up {
+  0% {
+    transform: translate3d(0, 0%, 0);
+  }
+  100% {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+@keyframes marquee-vertical-down {
+  0% {
+    transform: translate3d(0, -50%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0%, 0);
+  }
+}
+
+.animate-vertical-up {
+  animation: marquee-vertical-up 35s linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+.animate-vertical-down {
+  animation: marquee-vertical-down 40s linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Zero-JS Audio Equalizer Animation */
+@keyframes eq-pulse {
+  0% {
+    height: 25%;
+  }
+  50% {
+    height: 95%;
+  }
+  100% {
+    height: 35%;
+  }
+}
+
+.animate-eq {
+  animation: eq-pulse 0.85s ease-in-out infinite alternate;
+  will-change: height;
+}
+
+.track-container:hover .animate-vertical-up,
+.track-container:hover .animate-vertical-down {
+  animation-play-state: paused;
+}
+
+/* GPU-Accelerated Hardware Blobs (Zero Layout Re-calculations) */
+@keyframes gpu-blob-drift-1 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(50px, -40px, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(-30px, 30px, 0) scale(0.95);
+  }
+}
+
+@keyframes gpu-blob-drift-2 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-45px, 35px, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(35px, -25px, 0) scale(0.94);
+  }
+}
+
+@keyframes hero-float-gentle {
+  0%, 100% {
+    transform: translate3d(0, 0px, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0) rotate(0.4deg);
+  }
+}
+
+@keyframes hero-float-reverse {
+  0%, 100% {
+    transform: translate3d(0, 0px, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, 12px, 0) rotate(-0.4deg);
+  }
+}
+
+@keyframes hero-float-badge {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0) scale(1.03);
+  }
+}
+
+.animate-hero-float {
+  animation: hero-float-gentle 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-hero-float-reverse {
+  animation: hero-float-reverse 7s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-float-badge {
+  animation: hero-float-badge 4.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+.animate-glass-ripple {
+  animation: glass-ripple 1.3s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+/* Glassmorphism Surface Classes */
+.glass-surface {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 10px 35px rgba(23, 23, 20, 0.05);
+}
+
+.glass-neo {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(24px) saturate(165%);
+  -webkit-backdrop-filter: blur(24px) saturate(165%);
+  border: 2px solid #171714;
+  box-shadow: 4px 4px 0px #171714;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-neo:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #171714;
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+/* 3D Perspective Flip Card System */
+.perspective-1000 {
+  perspective: 1200px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+
+
