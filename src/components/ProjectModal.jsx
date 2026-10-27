@@ -26,6 +26,12 @@ export default function ProjectModal({ project, onClose }) {
   const [duration, setDuration] = useState(0);
   const [showControlsOverlay, setShowControlsOverlay] = useState(true);
   const [useNativeControls, setUseNativeControls] = useState(false);
+  const [isLandscape, setIsLandscape] = useState(project?.aspectRatio === '16/9');
+
+  // Sync landscape state whenever project changes
+  useEffect(() => {
+    setIsLandscape(project?.aspectRatio === '16/9');
+  }, [project]);
 
   // Keyboard navigation: Escape closes, Space toggles play/pause, M toggles mute
   useEffect(() => {
@@ -122,6 +128,11 @@ export default function ProjectModal({ project, onClose }) {
     const video = videoRef.current;
     if (video) {
       setDuration(video.duration);
+      if (video.videoWidth > video.videoHeight) {
+        setIsLandscape(true);
+      } else if (project?.aspectRatio !== '16/9') {
+        setIsLandscape(false);
+      }
     }
   };
 
@@ -176,7 +187,7 @@ export default function ProjectModal({ project, onClose }) {
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.94, opacity: 0, y: 25 }}
           transition={{ type: "spring", damping: 26, stiffness: 280 }}
-          className="relative z-10 w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-[#F2F0E8] text-[#171714] rounded-2xl sm:rounded-3xl border-3 border-[#171714] shadow-[8px_8px_0px_#171714] p-3.5 sm:p-5 md:p-6 flex flex-col gap-3.5 sm:gap-4"
+          className={`relative z-10 w-full ${isLandscape ? 'max-w-5xl' : 'max-w-4xl'} max-h-[92vh] overflow-y-auto bg-[#F2F0E8] text-[#171714] rounded-2xl sm:rounded-3xl border-3 border-[#171714] shadow-[8px_8px_0px_#171714] p-3.5 sm:p-5 md:p-6 flex flex-col gap-3.5 sm:gap-4`}
         >
           {/* Header Bar */}
           <div className="flex items-center justify-between gap-3 border-b-2 border-[#171714] pb-3">
@@ -188,7 +199,7 @@ export default function ProjectModal({ project, onClose }) {
                 {project.year}
               </span>
               <span className="text-[11px] font-mono font-bold text-[#77766F] hidden sm:inline">
-                • 9:16 YOUTUBE SHORTS CINEMA
+                • {isLandscape ? '16:9 CINEMATIC TVC WIDESCREEN' : '9:16 YOUTUBE SHORTS CINEMA'}
               </span>
             </div>
 
@@ -202,10 +213,10 @@ export default function ProjectModal({ project, onClose }) {
                     ? 'bg-[#171714] text-white shadow-[2px_2px_0px_#00E575]' 
                     : 'bg-white text-[#77766F] hover:text-[#171714] shadow-[1px_1px_0px_#171714]'
                 }`}
-                title="Toggle between custom YouTube Shorts overlay and native browser controls"
+                title="Toggle between custom overlay and native browser controls"
               >
                 <SlidersHorizontal size={11} />
-                <span>{useNativeControls ? 'Native Controls: ON' : 'Shorts UI'}</span>
+                <span>{useNativeControls ? 'Native: ON' : (isLandscape ? 'Cinema UI' : 'Shorts UI')}</span>
               </button>
 
               {/* Neo-Brutalist Close Button */}
@@ -221,16 +232,19 @@ export default function ProjectModal({ project, onClose }) {
             </div>
           </div>
 
-          {/* 2-Column Responsive Layout: 9:16 Shorts Video Screen (Left) + Project Details (Right) */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 items-center">
+          {/* 2-Column Responsive Layout: Video Cinema Screen (Left) + Project Details (Right) */}
+          <div className={`grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 ${isLandscape ? 'items-center' : 'items-center'}`}>
             
-            {/* Left Column: True 9:16 YouTube Shorts Style Vertical Cinema */}
-            <div className="md:col-span-5 flex justify-center items-center">
+            {/* Left Column: Video Cinema Player (Responsive 16:9 Widescreen or 9:16 Vertical) */}
+            <div className={`${isLandscape ? 'md:col-span-7' : 'md:col-span-5'} flex justify-center items-center`}>
               <div 
                 onMouseMove={handleMouseMove}
                 onMouseLeave={() => isPlaying && setShowControlsOverlay(false)}
                 onClick={togglePlay}
-                className="relative mx-auto h-[52vh] sm:h-[58vh] max-h-[460px] md:max-h-[480px] min-h-[250px] aspect-[9/16] w-auto max-w-full rounded-2xl sm:rounded-3xl overflow-hidden border-3 border-[#171714] shadow-[6px_6px_0px_#171714] bg-black flex items-center justify-center group select-none cursor-pointer"
+                className={isLandscape
+                  ? "relative mx-auto w-full max-w-[620px] aspect-[16/9] max-h-[52vh] rounded-2xl sm:rounded-3xl overflow-hidden border-3 border-[#171714] shadow-[6px_6px_0px_#171714] bg-black flex items-center justify-center group select-none cursor-pointer"
+                  : "relative mx-auto h-[52vh] sm:h-[58vh] max-h-[460px] md:max-h-[480px] min-h-[250px] aspect-[9/16] w-auto max-w-full rounded-2xl sm:rounded-3xl overflow-hidden border-3 border-[#171714] shadow-[6px_6px_0px_#171714] bg-black flex items-center justify-center group select-none cursor-pointer"
+                }
               >
                 {project.videoUrl ? (
                   <>
@@ -249,10 +263,10 @@ export default function ProjectModal({ project, onClose }) {
                       className="w-full h-full object-contain bg-black pointer-events-auto"
                     />
 
-                    {/* Custom YouTube Shorts UI Overlay when native controls are off */}
+                    {/* Custom Player UI Overlay when native controls are off */}
                     {!useNativeControls && (
                       <>
-                        {/* Top Bar: Shorts Indicator + Sound / Fullscreen Controls */}
+                        {/* Top Bar: Format Indicator + Sound / Fullscreen Controls */}
                         <div 
                           className={`absolute top-0 inset-x-0 p-2.5 sm:p-3 flex items-center justify-between transition-opacity duration-200 pointer-events-none z-20 ${
                             showControlsOverlay || !isPlaying ? 'opacity-100' : 'opacity-0'
@@ -260,7 +274,7 @@ export default function ProjectModal({ project, onClose }) {
                         >
                           <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-black/65 backdrop-blur-md border border-white/20 text-[10px] font-mono font-bold text-white uppercase tracking-wider">
                             <span className="w-1.5 h-1.5 rounded-full bg-[#00E575] animate-pulse" />
-                            <span>Shorts HD</span>
+                            <span>{isLandscape ? '16:9 Cinema TVC' : 'Shorts HD'}</span>
                           </div>
 
                           <div className="flex items-center gap-1.5 pointer-events-auto">
@@ -302,7 +316,7 @@ export default function ProjectModal({ project, onClose }) {
                           )}
                         </AnimatePresence>
 
-                        {/* Bottom Scrubber & Time Bar (YouTube Shorts Style - does NOT block bottom captions) */}
+                        {/* Bottom Scrubber & Time Bar (Minimal, non-intrusive) */}
                         <div 
                           className={`absolute bottom-0 inset-x-0 pt-6 pb-2 px-2.5 sm:px-3 bg-gradient-to-t from-black/85 via-black/45 to-transparent transition-opacity duration-200 z-20 pointer-events-none ${
                             showControlsOverlay || !isPlaying ? 'opacity-100' : 'opacity-0'
@@ -379,7 +393,7 @@ export default function ProjectModal({ project, onClose }) {
             </div>
 
             {/* Right Column: Project Details, Metric Badge & Conversion Stack */}
-            <div className="md:col-span-7 flex flex-col justify-between space-y-3 sm:space-y-4">
+            <div className={`${isLandscape ? 'md:col-span-5' : 'md:col-span-7'} flex flex-col justify-between space-y-3 sm:space-y-4`}>
               <div>
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-[#171714] font-sora leading-tight">
                   {project.title}

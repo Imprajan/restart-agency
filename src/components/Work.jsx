@@ -155,7 +155,7 @@ export default function Work({ projects, onSelectProject, onOpenContact }) {
 
   const categories = [
     { id: 'ALL', label: '✦ ALL HUSTLE' },
-    { id: 'UGC Product Promotion', label: '🎬 UGC PRODUCT PROMOTION' },
+    { id: 'Product Ads & UGC', label: '🎬 PRODUCT ADS & UGC' },
     { id: 'AI Podcast', label: '🎙️ AI PODCAST' },
     { id: 'Drama', label: '🎭 DRAMA (COMING SOON)' },
     { id: 'Pixar Animation', label: '✨ PIXAR ANIMATION (COMING SOON)' },

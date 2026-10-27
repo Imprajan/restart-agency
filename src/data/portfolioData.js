@@ -26,9 +26,9 @@ export const studioData = {
   capabilities: [
     {
       number: "01",
-      title: "UGC Product Promotion",
-      description: "Direct-response UGC videos built with viral 3-second hook psychology, authentic creator delivery, problem-solution arcs, and conversion-focused CTAs.",
-      deliverables: ["Direct-Response Ads", "TikTok & Meta Formats", "Hook Variations & Testing", "DTC Conversion Polish"]
+      title: "Product Ads & UGC",
+      description: "Direct-response UGC videos and cinematic product commercials built with viral 3-second hook psychology, authentic creator delivery, problem-solution arcs, and conversion-focused CTAs.",
+      deliverables: ["Product Commercials", "Direct-Response Ads", "TikTok & Meta Formats", "DTC Conversion Polish"]
     },
     {
       number: "02",
@@ -73,13 +73,26 @@ export const studioData = {
     }
   ],
 
-  // Structured in exact user categories: UGC, AI Podcast, Drama (Coming Soon), Pixar Animation (Coming Soon)
+  // Structured in exact user categories: Product Ads & UGC, AI Podcast, Drama (Coming Soon), Pixar Animation (Coming Soon)
   projects: [
-    // --- 1. UGC Product Promotion & Commercials ---
+    // --- 1. Product Ads & UGC ---
+    {
+      id: "hervyan-knife-commercial",
+      title: "HERVYAN German Steel Chef's Knife TVC",
+      category: "Product Ads & UGC",
+      aspectRatio: "16/9",
+      year: "2026",
+      client: "HERVYAN",
+      videoUrl: "/videos/hervyan-product-ad.mp4",
+      directViewUrl: "/videos/hervyan-product-ad.mp4",
+      metrics: "Commercial TVC • 1080p Master",
+      description: "Cinematic direct-response product commercial showcasing HERVYAN's hand-finished German stainless steel chef's knives. Features precision cutting angles, macro edge reflections, water slice dynamics, and bold typography engineered to drive high-ticket culinary sales.",
+      tags: ["Product Commercial", "German Steel Knife", "Macro Lighting", "Brand TVC", "DTC Ad"]
+    },
     {
       id: "luxury-heritage-commercial",
       title: "Luxury Heritage Commercial TVC",
-      category: "UGC Product Promotion",
+      category: "Product Ads & UGC",
       year: "2026",
       client: "Heritage Fine Jewelry",
       videoUrl: "/videos/Product-1.mp4",
@@ -91,7 +104,7 @@ export const studioData = {
     {
       id: "ugc-vol-1",
       title: "Direct-Response UGC Ad — Vol. I",
-      category: "UGC Product Promotion",
+      category: "Product Ads & UGC",
       year: "2026",
       client: "DTC Brand Campaign",
       videoUrl: "/videos/ugc-1.mp4",
@@ -103,7 +116,7 @@ export const studioData = {
     {
       id: "ugc-dopamine",
       title: "Dopamine Hook & Conversion UGC",
-      category: "UGC Product Promotion",
+      category: "Product Ads & UGC",
       year: "2026",
       client: "Creator eCommerce Brand",
       videoUrl: "/videos/ugc-2.mp4",
@@ -115,7 +128,7 @@ export const studioData = {
     {
       id: "explainer-motion-1",
       title: "Motion Graphics Explainer Commercial — Vol. I",
-      category: "UGC Product Promotion",
+      category: "Product Ads & UGC",
       year: "2026",
       client: "Global SaaS & Tech Brand",
       videoUrl: "/videos/Explainer-1.mp4",
@@ -127,7 +140,7 @@ export const studioData = {
     {
       id: "explainer-motion-2",
       title: "Product Teardown & Explainer — Vol. II",
-      category: "UGC Product Promotion",
+      category: "Product Ads & UGC",
       year: "2026",
       client: "Consumer App & Platform",
       videoUrl: "/videos/Explainer-2.mp4",

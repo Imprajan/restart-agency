@@ -122,7 +122,7 @@ export default function Hero({ studio, projects = [], onSelectProject, onScrollT
           {/* Interactive Quick-Jump Category Pills */}
           <div className="mt-4 sm:mt-5 flex flex-wrap gap-2 sm:gap-2.5 font-sora text-xs">
             {[
-              { label: "🎬 UGC Product Promotion", target: "hustle", bg: "#00E575" },
+              { label: "🎬 Product Ads & UGC", target: "hustle", bg: "#00E575" },
               { label: "🎙️ AI Podcast Cuts", target: "hustle", bg: "#FFFFFF" },
               { label: "🎭 Drama (Coming Soon)", target: "hustle", bg: "#FFD277" },
               { label: "✨ Pixar Animation (Coming Soon)", target: "hustle", bg: "#FFFFFF" }
